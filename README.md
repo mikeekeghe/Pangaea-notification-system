@@ -1,5 +1,12 @@
-# Pangaea-notification-system
-## Take home Test
+# Pangaea-notification-system Take home Test
+#### By Michael Ekeghe
+
+## sample endpoints
+### Task 1
+http://127.0.0.1:8000/api/subscribe/topic1
+
+### Task 2
+http://127.0.0.1:8000/api/publish/topic1
 
 ## Tasks
 ### Task 1
