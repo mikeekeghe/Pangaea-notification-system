@@ -39,39 +39,3 @@ POST
 POST 
 /publish/{topic}
 
-#### Examples
-1. 
-Expected Body
-   
-{
-url: string 
-}
-
-Success Response
-{
-url: string, 
-topic: string
-}
-
-POST /subscribe/topic1 // body
-{
-url: "http://mysubscriber.test" 
-}
-Response:
-{
-url: "http://mysubscriber.test", 
-topic: "topic1"
-}
-
-2. 
-Expected Body
-// must be a javascript object {}, it can contain any keys and have nested data
-{
-[key: string]: any
-}
-Expected Response
-Should give a meaningful HTTP response code based on whether the publish was successful or not
-Payload sent to subscribers
-{
-data: object // whatever data was sent in the publish body 
-}
