@@ -14,4 +14,7 @@ class Subscription extends Model
         'topic',
         'url',
     ];
+
+    protected $hidden = ['created_at', 'id', 'updated_at'];
+
 }

@@ -14,4 +14,7 @@ class MessageObject extends Model
         'topic',
         'message',
     ];
+
+    protected $hidden = ['created_at', 'id', 'updated_at'];
+
 }

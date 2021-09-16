@@ -3,6 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\MessageObjectController;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +21,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::match(['get', 'post'], '/subscribe/{topic}', [SubscriptionController::class, 'createSubscriber']);
+Route::match(['get', 'post'], '/publish/{topic}',  [MessageObjectController::class, 'postMessage']);

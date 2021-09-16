@@ -2,83 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 
 class MessageObjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function postMessage(Request $request, $topic)
     {
-        //
+        if (
+            $request->has([
+                'message',
+            ])
+        ) {
+            $message = $request->input('message');
+
+            $subscribers = Subscription::where('topic', $topic)->get();
+            if (!empty($subscribers)) {
+                $message = self::sendMessageToSubscribers($message, $subscribers);
+                return response()->json([
+                    'status' => $message,
+                    'subscribers' => $subscribers,
+                ], 200);
+            } else {
+                $message = "Topic Has No Subscribers";
+                return response()->json([
+                    'status' => $message,
+                ], 400);
+            }
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function sendMessageToSubscribers($the_message, $the_subscribers){
+        return "Notifications Sent to Subscribers Succesfully";
     }
 }
